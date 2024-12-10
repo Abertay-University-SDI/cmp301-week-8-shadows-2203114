@@ -28,12 +28,28 @@ private:
 	TextureShader* textureShader;
 	PlaneMesh* mesh;
 
-	Light* light;
+	Light* light[2];
 	AModel* model;
+
+	CubeMesh* cube;
+	SphereMesh* sphere;
+
+
+	XMFLOAT3 cubePos;
+
+	XMFLOAT3 lightPos1;
+	XMFLOAT3 lightDir1;
+
+	XMFLOAT3 lightPos2;
+	XMFLOAT3 lightDir2;
+
 	ShadowShader* shadowShader;
 	DepthShader* depthShader;
 
-	ShadowMap* shadowMap;
+
+
+
+	ShadowMap* shadowMap[2];
 };
 
 #endif
