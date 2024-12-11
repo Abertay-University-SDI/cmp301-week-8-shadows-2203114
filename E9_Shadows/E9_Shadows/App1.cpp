@@ -41,9 +41,9 @@ void App1::init(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeigh
 
 	lightDir1 = XMFLOAT3(0, -0.7, 0.7);
 
-	lightPos2 = XMFLOAT3(0, 0, -10);
+	lightPos2 = XMFLOAT3(0, 0, 10);
 
-	lightDir2 = XMFLOAT3(0, -0.7, 0.7);
+	lightDir2 = XMFLOAT3(0, -0.7, -0.7);
 
 
 	// This is your shadow map
@@ -53,7 +53,7 @@ void App1::init(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeigh
 	// Configure directional light
 	light[0] = new Light();
 	light[0]->setAmbientColour(0.3f, 0.3f, 0.3f, 1.0f);
-	light[0]->setDiffuseColour(1.0f, 1.0f, 1.0f, 1.0f);
+	light[0]->setDiffuseColour(0.f, 1.0f, 0.f, 1.0f);
 	light[0]->setDirection(lightDir1.x,lightDir1.y,lightDir1.z);
 	light[0]->setPosition(lightPos1.x,lightPos1.y,lightPos1.z);
 	light[0]->generateOrthoMatrix((float)sceneWidth, (float)sceneHeight, 0.1f, 100.f);
@@ -187,8 +187,7 @@ void App1::finalPass()
 	worldMatrix = XMMatrixTranslation(-50.f, 0.f, -10.f);
 	// Render floor
 	mesh->sendData(renderer->getDeviceContext());
-	shadowShader->setShaderParameters(renderer->getDeviceContext(), worldMatrix, viewMatrix, projectionMatrix, 
-		textureMgr->getTexture(L"brick"), sm, light);
+	shadowShader->setShaderParameters(renderer->getDeviceContext(), worldMatrix, viewMatrix, projectionMatrix, textureMgr->getTexture(L"brick"), sm, light);
 	shadowShader->render(renderer->getDeviceContext(), mesh->getIndexCount());
 
 	// Render model
